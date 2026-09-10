@@ -1,0 +1,37 @@
+version: "3.9"
+
+# Optional convenience file: brings up MongoDB, the ML microservice, and
+# the Node backend together. The React frontend is still run with
+# `npm run dev` on the host (fastest for live editing during the
+# hackathon) -- see README.md. If you'd rather containerize it too,
+# add a fourth service that builds frontend/ and serves the static
+# build with nginx.
+services:
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  ml-service:
+    build: ./ml-service
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "python train_model.py && uvicorn app:app --host 0.0.0.0 --port 8000"
+
+  backend:
+    build: ./backend
+    ports:
+      - "5050:5050"
+    environment:
+      - PORT=5050
+      - MONGO_URI=mongodb://mongo:27017/fleetwake
+      - ML_SERVICE_URL=http://ml-service:8000
+    depends_on:
+      - mongo
+      - ml-service
+
+volumes:
+  mongo_data:
