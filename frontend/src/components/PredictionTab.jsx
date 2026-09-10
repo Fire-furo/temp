@@ -74,11 +74,11 @@ export default function PredictionTab({ meta }) {
             </select>
           </Field>
           <Field label={`Speed: ${form.speedKn} kn`}>
-            <input id="speedkn" type="range" min="8" max="24" step="0.5" value={form.speedKn} onChange={update("speedKn")}
+            <input id="speedkn" type="range" min="8" max="24" step="0.01" value={form.speedKn} onChange={update("speedKn")}
               className="w-full accent-sea-600" />
           </Field>
           <Field label={`Cargo load: ${Math.round(form.cargoLoadFrac * 100)}%`}>
-            <input type="range" min="0.1" max="1.1" step="0.05" value={form.cargoLoadFrac} onChange={update("cargoLoadFrac")}
+            <input type="range" min="0.1" max="1.1" step="0.01" value={form.cargoLoadFrac} onChange={update("cargoLoadFrac")}
               className="w-full accent-sea-600" />
           </Field>
           <Field label="Distance (nautical miles)">
