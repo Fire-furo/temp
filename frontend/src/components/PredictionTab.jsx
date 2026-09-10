@@ -7,9 +7,9 @@ export default function PredictionTab({ meta }) {
   const seaStateNames = Object.keys(meta?.seaStates || {});
 
   const [form, setForm] = useState({
-    vesselType: vesselNames[0] || "",
-    fuelType: fuelNames[0] || "",
-    seaState: seaStateNames[1] || seaStateNames[0] || "",
+    vesselType: "small_general_cargo",
+    fuelType: "hfo",
+    seaState: "moderate",
     speedKn: 16,
     distanceNm: 1200,
     cargoLoadFrac: 0.7,
