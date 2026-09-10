@@ -19,7 +19,7 @@ export default function PredictionTab({ meta }) {
   const [error, setError] = useState(null);
 
   const update = (key) => (e) =>
-    setForm((f) => ({ ...f, [key]: e.target.type === "number" ? Number(e.target.value) : e.target.value }));
+    setForm((f) => ({ ...f, [key]: e.target.id === "speedkn" ? Number(e.target.value) : e.target.value }));
 
   async function runPredict(e) {
     e.preventDefault();
@@ -74,7 +74,7 @@ export default function PredictionTab({ meta }) {
             </select>
           </Field>
           <Field label={`Speed: ${form.speedKn} kn`}>
-            <input type="range" min="8" max="24" step="0.5" value={form.speedKn} onChange={update("speedKn")}
+            <input id="speedkn" type="range" min="8" max="24" step="0.5" value={form.speedKn} onChange={update("speedKn")}
               className="w-full accent-sea-600" />
           </Field>
           <Field label={`Cargo load: ${Math.round(form.cargoLoadFrac * 100)}%`}>
